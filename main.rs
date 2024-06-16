@@ -11,14 +11,18 @@ use derive_builder::Builder;
 #[derive(Builder)]
 pub struct Command {
     executable: Option<String>,
+    #[builder(each = "arg")]
     args: Vec<String>,
+    #[builder(eac = "env")]
     env: Vec<String>,
     current_dir: String,
 }
 
 fn main() {
-    let builder = Command::builder()
-        .executable("boo".to_owned())
+    Command::builder()
+        .arg("boo".to_owned())
+        .env("uuu".to_owned())
+        .current_dir("".to_owned())
         .build()
         .unwrap();
 }
